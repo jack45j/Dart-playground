@@ -1,0 +1,8 @@
+name: dat_playground
+description: A new Dart project.
+publish_to: none
+version: 1.0.0
+environment:
+  sdk: '^3.4.4'
+dependencies:
+  uuid: ^4.4.2

@@ -9,5 +9,5 @@
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {}
     },
-    "postCreateCommand": "bash .devcontainer/install-dart.sh"
+    "postCreateCommand": "bash .devcontainer/locate-arch.sh"
 }

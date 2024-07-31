@@ -1,6 +1,7 @@
 import '../domain/book_domain.dart';
+import '../domain/storage/abstracts/repositoryType.dart';
 
-class SomeStorageService implements BookStorageType {
+class BookStorageService implements RepositoryType<Book> {
   Map<String, Book> cached = {};
   
   void create(Book book) {
