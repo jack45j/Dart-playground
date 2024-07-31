@@ -1,0 +1,13 @@
+{
+    "name": "Custom Dart Dev Container",
+    "image": "mcr.microsoft.com/devcontainers/base:debian",
+    "customizations": {
+        "vscode": {
+        "extensions": ["Dart-Code.dart-code"]
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {}
+    },
+    "postCreateCommand": "bash .devcontainer/install-dart.sh"
+}
