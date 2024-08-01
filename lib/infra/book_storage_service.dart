@@ -1,5 +1,5 @@
-import '../domain/book_domain.dart';
-import '../domain/storage/abstracts/repositoryType.dart';
+import 'package:dart_playground/domain/book/book.dart';
+import 'package:dart_playground/common/repository_type.dart';
 
 class BookStorageService implements RepositoryType<Book> {
   Map<String, Book> cached = {};

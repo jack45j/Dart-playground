@@ -1,16 +1,37 @@
 #!/bin/bash
 set -e
-
-# 檢測系統架構
 ARCH=$(uname -m)
-
+ARCH_TAG="x64"
 if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
-    echo "檢測到 ARM64 架構，執行 ARM64 安裝腳本"
-    bash install-dart-arm64.sh
+    echo "Detected ARM64 architecture, executing ARM64 installation script"
+    ARCH_TAG="arm64"
 elif [ "$ARCH" = "x86_64" ]; then
-    echo "檢測到 x86_64 架構，執行 x64 安裝腳本"
-    bash install-dart-x64.sh
+    echo "Detected x86_64 architecture, executing x64 installation script"
+    ARCH_TAG="x64"
 else
-    echo "不支援的架構: $ARCH"
+    echo "Unsupported architecture: $ARCH"
     exit 1
 fi
+
+# Install necessary tools
+sudo apt-get update
+sudo apt-get install -y wget unzip
+
+# Download Dart SDK
+DART_VERSION="3.4.4"
+wget "https://storage.googleapis.com/dart-archive/channels/stable/release/${DART_VERSION}/sdk/dartsdk-linux-${ARCH_TAG}-release.zip"
+
+# Extract to /usr/lib/dart
+sudo mkdir -p /usr/lib/dart
+sudo unzip "dartsdk-linux-${ARCH_TAG}-release.zip" -d /usr/lib/dart
+
+# Set up PATH
+echo 'export PATH="$PATH:/usr/lib/dart/dart-sdk/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:/usr/lib/dart/dart-sdk/bin"' >> ~/.zshrc
+
+# Clean up downloaded files
+rm "dartsdk-linux-${ARCH_TAG}-release.zip"
+
+# Verify installation
+source ~/.bashrc
+dart --version

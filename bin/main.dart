@@ -1,7 +1,7 @@
-import '../lib/domain/storage/abstracts/repositoryType.dart';
-import '../lib/infra/book_storage_service.dart';
-import '../lib/domain/book_domain.dart';
-
+import 'package:dart_playground/ServiceLocator.dart';
+import 'package:dart_playground/domain/book/book_domain.dart';
+import 'package:dart_playground/common/repository_type.dart';
+import 'package:dart_playground/infra/book_storage_service.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
@@ -12,20 +12,7 @@ void main() {
   final service = locator.get<RepositoryType<Book>>();
   
   service.create(Book(Uuid().v4(), "some title"));
-
-  
+  service.create(Book(Uuid().v4(), "some title1"));
 }
 
-final class ServiceLocator {
-  static final _locator = ServiceLocator._internal();
 
-  factory ServiceLocator() => _locator;
-
-  ServiceLocator._internal();
-
-  void register<T>(T instance) => _locator._serviceMap[T] = instance;
-
-  T get<T>() => _locator._serviceMap[T] as T;
-
-  final Map<Type, dynamic> _serviceMap = {};
-}
