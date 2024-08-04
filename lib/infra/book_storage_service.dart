@@ -3,25 +3,26 @@ import 'package:dart_playground/common/repository_type.dart';
 
 class BookStorageService implements RepositoryType<Book> {
   Map<String, Book> cached = {};
-  
-  void create(Book book) {
+
+  Future<void> create(Book book) async {
     cached[book.id] = book;
-    print(cached);
+    print(book.bookType);
+    print(cached.toString());
   }
   
-  void delete(String id) {
+  Future<void> delete(String id) async {
     cached.remove(id);
-    print(cached);
+    print(cached.toString());
   }
   
-  Book? read(String id) {
+  Future<Book?> read(String id) async {
     Book? book = cached[id];
-    print(cached);
+    print(cached.toString());
     return book;
   }
   
-  void update(Book book) {
+  Future<void> update(Book book) async {
     cached[book.id] = book;
-    print(cached);
+    print(cached.toString());
   }
 }
