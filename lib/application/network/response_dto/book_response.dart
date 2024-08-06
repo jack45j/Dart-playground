@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dart_playground/domain/book/book_domain.dart';
+import 'package:dart_playground/domain/shared/value_objects/currency.dart';
 
 class BooksResponse {
   final List<BookResponseDto> data;
@@ -17,18 +18,17 @@ class BooksResponse {
 
   List<Book> toDomain() {
     return data.map((dto) {
-      return Book.create(
-        id: dto.id, 
-        title: dto.title, 
-        author: dto.author, 
-        coverUrl: dto.coverUrl, 
-        isbn: dto.isbn, 
-        publisher: dto.publisher, 
-        publishDate: dto.publicationDate, 
-        lang: dto.language, 
-        amount: dto.price.toDouble(), 
-        currency: dto.currency, 
-        desc: dto.description);
+      return Book(
+        dto.id, 
+        dto.title, 
+        dto.description, 
+        Collaborators(dto.author), 
+        ISBN(dto.isbn), 
+        Publishing(dto.publisher, DateTime.parse(dto.publicationDate)), 
+        Language(dto.language), 
+        Price(dto.price.toDouble(), Currency.from(dto.currency)), 
+        CoverImage(Uri.parse(dto.coverUrl)),
+        dto.discounted);
     })
     .whereType<Book>()
     .toList();
@@ -45,6 +45,7 @@ class BookResponseDto {
   String publicationDate;
   String language;
   num price;
+  num? discounted;
   String currency;
   String description;
 
@@ -59,12 +60,13 @@ class BookResponseDto {
     required this.language,
     required this.price,
     required this.currency,
+    required this.discounted,
     required this.description,
   });
 
   @override
   String toString() {
-    return 'BookResponseDto(id: $id, title: $title, author: $author, coverUrl: $coverUrl, isbn: $isbn, publisher: $publisher, publicationDate: $publicationDate, language: $language, price: $price, currency: $currency, description: $description)';
+    return 'BookResponseDto(id: $id, title: $title, author: $author, coverUrl: $coverUrl, isbn: $isbn, publisher: $publisher, publicationDate: $publicationDate, language: $language, price: $price, currency: $currency, discounted: $discounted, description: $description)';
   }
 
   factory BookResponseDto.fromJson(Map<String, dynamic> json) {
@@ -79,6 +81,7 @@ class BookResponseDto {
       language: json['language'].toString(),
       price: num.tryParse(json['price'].toString()) ?? 0,
       currency: json['currency'].toString(),
+      discounted: json['discounted'] as num?,
       description: json['description'].toString(),
     );
   }

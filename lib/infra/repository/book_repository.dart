@@ -1,7 +1,6 @@
-import 'package:dart_playground/domain/book/book.dart';
-import 'package:dart_playground/common/repository_type.dart';
+import 'package:dart_playground/domain/book/book_domain.dart';
 
-class BookStorageService implements RepositoryType<Book> {
+class BookRepository implements BookRepositoryType {
   Map<String, Book> cached = {};
 
   Future<void> create(Book book) async {
@@ -19,5 +18,9 @@ class BookStorageService implements RepositoryType<Book> {
 
   Future<void> update(Book book) async {
     cached[book.id] = book;
+  }
+
+  Future<List<Book>> listAll() async {
+    return cached.values.toList();
   }
 }

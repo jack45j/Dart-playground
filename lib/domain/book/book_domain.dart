@@ -1,2 +1,9 @@
-export 'book.dart';
-export 'book_type.dart';
+export 'entities/book.dart';
+export 'repositories/book_repository_type.dart';
+export 'value_objects/book_type.dart';
+export 'value_objects/collaborators.dart';
+export 'value_objects/cover_image.dart';
+export 'value_objects/isbn.dart';
+export 'value_objects/language.dart';
+export 'value_objects/price.dart';
+export 'value_objects/publishing.dart';

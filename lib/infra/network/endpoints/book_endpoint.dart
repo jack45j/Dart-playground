@@ -1,7 +1,7 @@
 import 'package:dart_playground/infra/network/clients/http_client.dart';
 
 enum BookEndPoint implements EndPoint {
-  fetch_books;
+  fetchBooks;
 
   Map<String, String> get headers {
     return {
@@ -12,14 +12,14 @@ enum BookEndPoint implements EndPoint {
 
   HttpRequestMethod get method {
     switch (this) {
-      case BookEndPoint.fetch_books:
+      case BookEndPoint.fetchBooks:
       return HttpRequestMethod.get;
     }
   }
 
   Uri get url {
     switch (this) {
-      case BookEndPoint.fetch_books:
+      case BookEndPoint.fetchBooks:
       return Uri(scheme: "https", host: 'some-url.com');
     }
   }

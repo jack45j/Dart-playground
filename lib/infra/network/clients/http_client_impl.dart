@@ -7,7 +7,7 @@ final class MockHttpClient implements HttpClient {
     await Future.delayed(Duration(milliseconds: 500));
 
     switch (request) {
-      case BookEndPoint.fetch_books:
+      case BookEndPoint.fetchBooks:
         return '''
       {
         "data": [
@@ -86,6 +86,7 @@ final class MockHttpClient implements HttpClient {
             "publication_date": "2014-10-28",
             "language": "English",
             "price": 34.99,
+            "discounted": 0.61,
             "currency": "USD",
             "description": "Over 60 practical recipes for building web and mobile applications with Dart, covering a wide range of topics."
           },
