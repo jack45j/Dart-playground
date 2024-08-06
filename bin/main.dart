@@ -18,6 +18,7 @@ void main() {
   bookRemoteService.fetch_books({})
     .then((books) {
       for (var book in books) {
+        print(book.toString());
         bookRepo.create(book);
       }
     });
