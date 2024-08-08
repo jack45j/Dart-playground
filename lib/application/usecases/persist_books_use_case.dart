@@ -11,8 +11,6 @@ class PersistBooksUseCaseImpl implements PersistBooksUseCase {
   PersistBooksUseCaseImpl(this._bookRepository);
 
   Future<void> execute(List<Book> books) async {
-    for (var book in books) {
-      await _bookRepository.update(book);
-    }
+    await _bookRepository.batchUpdate(books);
   }
 }

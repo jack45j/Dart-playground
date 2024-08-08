@@ -50,6 +50,6 @@ class BookApplicationService {
   }
 
   Price getDiscountedPrice(Book book) {
-    return _bookDomainService.calculateDiscount(book);
+    return book.price.calculateDiscount(book.discounted ?? 1);
   }
 }

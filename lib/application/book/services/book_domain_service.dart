@@ -13,15 +13,4 @@ class BookDomainService {
   List<Book> getBooksOnSale(List<Book> books) {
     return books.where((book) => book.isOnSale).toList();
   }
-
-  Price calculateDiscount(Book book) {
-    if (!book.isOnSale) {
-      return book.price;
-    }
-    
-    return Price(
-      (book.price.amount * (book.discounted ?? 1) * 100).ceil() / 100,
-      book.price.unit
-    );
-  }
 }

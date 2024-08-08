@@ -5,4 +5,11 @@ class Price {
   Currency unit;
 
   Price(this.amount, this.unit);
+
+  Price calculateDiscount(num discounted) {    
+    return Price(
+      (this.amount * discounted * 100).ceil() / 100,
+      this.unit
+    );
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:dart_playground/domain/book/book_domain.dart';
 
-class BookRepository implements BookRepositoryType {
+class BookRepository extends BookRepositoryType with BatchExecute<Book> {
   Map<String, Book> cached = {};
 
   Future<void> create(Book book) async {
