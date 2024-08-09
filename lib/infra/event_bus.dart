@@ -1,6 +1,7 @@
 import 'dart:async';
+import 'package:dart_playground/application/utils/event_bus_service.dart';
 
-class EventBus {
+class EventBus implements EventBusService {
   // 單例模式
   static final EventBus _instance = EventBus._internal();
   factory EventBus() => _instance;

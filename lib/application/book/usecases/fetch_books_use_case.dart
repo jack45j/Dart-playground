@@ -1,4 +1,4 @@
-import 'package:dart_playground/application/network/book_remote.dart';
+import 'package:dart_playground/application/book/network/book_remote.dart';
 import 'package:dart_playground/domain/book/book_domain.dart';
 
 abstract class FetchBooksUseCase {

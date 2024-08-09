@@ -4,7 +4,7 @@ import 'package:dart_playground/infra/network/http_client_services.dart';
 final class MockHttpClient implements HttpClient {
   @override
   Future<String> request(EndPoint request, Map<String, dynamic> params) async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(Duration(seconds: 1));
 
     switch (request) {
       case BookEndPoint.fetchBooks:

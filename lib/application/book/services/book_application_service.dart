@@ -1,21 +1,22 @@
-import 'package:dart_playground/application/book/events/books_reloaded_event.dart';
-import 'package:dart_playground/application/book/services/book_domain_service.dart';
-import 'package:dart_playground/application/event_bus.dart';
-import 'package:dart_playground/application/usecases/list_Books_use_case.dart';
-import 'package:dart_playground/application/usecases/fetch_books_use_case.dart';
-import 'package:dart_playground/application/usecases/persist_books_use_case.dart';
+import 'package:dart_playground/application/book/dto/book_dto.dart';
+import 'package:dart_playground/domain/book/events/books_reloaded_event.dart';
+import 'package:dart_playground/application/book/services/book_query_service.dart';
+import 'package:dart_playground/application/utils/event_bus_service.dart';
+import 'package:dart_playground/application/book/usecases/list_books_use_case.dart';
+import 'package:dart_playground/application/book/usecases/fetch_books_use_case.dart';
+import 'package:dart_playground/application/book/usecases/persist_books_use_case.dart';
 import 'package:dart_playground/domain/book/book_domain.dart';
 
 class BookApplicationService {
   
-  final BookDomainService _bookDomainService;
+  final BookQueryService _bookQueryService;
   final PersistBooksUseCase _persistBooksUseCase;
   final FetchBooksUseCase _fetchBooksUseCase;
   final ListBooksUseCase _listBooksUseCases;
-  final EventBus _eventBus;
+  final EventBusService _eventBus;
 
   BookApplicationService(
-    this._bookDomainService,
+    this._bookQueryService,
     this._persistBooksUseCase,
     this._fetchBooksUseCase,
     this._listBooksUseCases,
@@ -30,26 +31,26 @@ class BookApplicationService {
     _eventBus.fire(BooksReloadedEvent(books));
   }
 
-  Future<List<Book>> getAllBooks() async {
-    return _listBooksUseCases.execute();
-  }
+  // MARK: List
 
-  Future<List<Book>> listBooksByBookType(BookType type) async {
+  Future<List<BookDTO>> listBooksByBookType(BookType type) async {
     final books = await _listBooksUseCases.execute();
-    return _bookDomainService.filterBooksByType(type, books);
+    return _bookQueryService.filterBooksByType(books, type).toDTO();
   }
 
-  Future<List<Book>> getBooksSortedByAuthor() async {
+  Future<List<BookDTO>> listAllBooks() async {
     final books = await _listBooksUseCases.execute();
-    return _bookDomainService.sortBooksByAuthor(books);
+    return books.toDTO();
   }
 
-  Future<List<Book>> getBooksOnSale() async {
+  Future<List<BookDTO>> listSortedFilteredBooks(BookQueryCriteria criteria) async {
     final books = await _listBooksUseCases.execute();
-    return _bookDomainService.getBooksOnSale(books);
+    return _bookQueryService.filterAndSortBooks(books, criteria).toDTO();
   }
+}
 
-  Price getDiscountedPrice(Book book) {
-    return book.price.calculateDiscount(book.discounted ?? 1);
+extension BookListExtension on List<Book> {
+  List<BookDTO> toDTO() {
+    return map((book) => BookDTO.fromDomain(book)).toList();
   }
 }

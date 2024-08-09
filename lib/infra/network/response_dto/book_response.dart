@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:dart_playground/domain/book/book_domain.dart';
-import 'package:dart_playground/domain/shared/value_objects/currency.dart';
+import 'package:dart_playground/common/value_objects/currency.dart';
 
 class BooksResponse {
   final List<BookResponseDto> data;
@@ -19,7 +19,7 @@ class BooksResponse {
   List<Book> toDomain() {
     return data.map((dto) {
       return Book(
-        dto.id, 
+        BookId(dto.id), 
         dto.title, 
         dto.description, 
         Collaborators(dto.author), 

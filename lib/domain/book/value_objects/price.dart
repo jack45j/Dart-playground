@@ -1,4 +1,4 @@
-import 'package:dart_playground/domain/shared/value_objects/currency.dart';
+import 'package:dart_playground/common/value_objects/currency.dart';
 
 class Price {
   double amount;
@@ -6,9 +6,9 @@ class Price {
 
   Price(this.amount, this.unit);
 
-  Price calculateDiscount(num discounted) {    
+  Price calculateDiscounted(num? discounted) { 
     return Price(
-      (this.amount * discounted * 100).ceil() / 100,
+      (this.amount * (discounted ?? 1.0) * 100).ceil() / 100,
       this.unit
     );
   }

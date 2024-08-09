@@ -1,7 +1,8 @@
+import 'package:dart_playground/application/book/network/book_remote.dart';
 import 'package:dart_playground/domain/book/book_domain.dart';
 import 'package:dart_playground/infra/network/endpoints/endpoints.dart';
 import 'package:dart_playground/infra/network/http_client_services.dart';
-import 'package:dart_playground/application/network/response_dto/book_response.dart';
+import 'package:dart_playground/infra/network/response_dto/book_response.dart';
 
 final class MockBooksRemoteService implements BooksRemoteService {
   HttpClient _client;

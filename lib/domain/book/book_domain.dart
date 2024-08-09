@@ -1,4 +1,4 @@
-export 'entities/book.dart';
+export 'aggregate/book.dart';
 export 'repositories/book_repository_type.dart';
 export 'value_objects/book_type.dart';
 export 'value_objects/collaborators.dart';
@@ -7,3 +7,7 @@ export 'value_objects/isbn.dart';
 export 'value_objects/language.dart';
 export 'value_objects/price.dart';
 export 'value_objects/publishing.dart';
+export 'value_objects/book_query_criteria.dart';
+export 'value_objects/book_filters.dart';
+export 'value_objects/book_sorts.dart';
+export 'value_objects/book_id.dart';

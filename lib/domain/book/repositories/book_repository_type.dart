@@ -1,8 +1,8 @@
-import 'package:dart_playground/domain/shared/interfaces/identifiable.dart';
-import 'package:dart_playground/domain/shared/interfaces/repository_type.dart';
+import 'package:dart_playground/domain/shared/aggregate_root.dart';
+import 'package:dart_playground/domain/shared/repository_type.dart';
 import 'package:dart_playground/domain/book/book_domain.dart';
 
-mixin BatchExecute<T extends Identifiable> on RepositoryType<T> {
+mixin BatchExecute<T extends AggregateRoot> on RepositoryType<T> {
   Future<void> batchUpdate(List<T> items) async {
     for (final item in items) {
       await update(item);
