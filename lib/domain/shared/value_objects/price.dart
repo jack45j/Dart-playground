@@ -1,4 +1,4 @@
-import 'package:dart_playground/common/value_objects/currency.dart';
+import 'package:dart_playground/domain/shared/value_objects/currency.dart';
 
 class Price {
   double amount;

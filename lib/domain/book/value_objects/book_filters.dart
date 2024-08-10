@@ -2,14 +2,14 @@ import 'package:dart_playground/common/interfaces/filter_option.dart';
 import 'package:dart_playground/domain/book/book_domain.dart';
 
 final class BookFilters {
-  static FilterOption<Book> byIsOnSale = BookFilterByIsOnSale();
+  static FilterOption<Book> byIsHasPromot = BookFilterByIsHasPromot();
 
   BookFilters._();
 }
 
-final class BookFilterByIsOnSale extends FilterOption<Book> {
-  BookFilterByIsOnSale(): super(
-    filterBy: (a) => a.isOnSale,
+final class BookFilterByIsHasPromot extends FilterOption<Book> {
+  BookFilterByIsHasPromot(): super(
+    filterBy: (a) => a.isHasPromot,
     filterOptionTitle: "Sales"
   );
 }

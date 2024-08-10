@@ -1,5 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dart_playground/domain/book/book_domain.dart';
-import 'package:dart_playground/domain/shared/aggregate_root.dart';
+import 'package:dart_playground/domain/shared/shared.dart';
 
 class Book implements AggregateRoot {
   BookId uniqId;
@@ -11,11 +12,22 @@ class Book implements AggregateRoot {
   Publishing publishing;
   Language lang;
   Price price;
-  num? discounted;
+  List<PromotionCode> promotions;
+  
+  Book({
+    required this.uniqId,
+    required this.title,
+    required this.desc,
+    required this.collaboratos,
+    required this.coverImage,
+    required this.isbn,
+    required this.publishing,
+    required this.lang,
+    required this.price,
+    required this.promotions,
+  });
 
-  Book(this.uniqId, this.title, this.desc, this.collaboratos, this.isbn, this.publishing, this.lang, this.price, this.coverImage, [this.discounted]);
-
-  bool get isOnSale => discounted != null;
+  bool get isHasPromot => !promotions.isEmpty;
 
   bool get isTrial => uniqId.id.toLowerCase().endsWith('trial');
 
